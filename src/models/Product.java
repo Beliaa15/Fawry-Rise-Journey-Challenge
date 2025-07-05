@@ -134,4 +134,13 @@ public class Product implements Expirable, Shippable {
         
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        
+        Product product = (Product) obj;
+        return name != null ? name.equals(product.name) : product.name == null;
+    }
 }

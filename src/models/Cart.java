@@ -13,11 +13,33 @@ public class Cart {
     }
 
     public void add(Product product, int quantity) {
-        if (product.isInStock(quantity)) {
+        if (!product.isInStock(quantity)) {
+            System.out.println("Error: Not enough stock for " + product.getName());
+            return;
+        }
+        
+        // Check if product already exists in cart
+        CartItem existingItem = null;
+        for (CartItem item : items) {
+            if (item.getProduct().equals(product)) {
+                existingItem = item;
+                break;
+            }
+        }
+        
+        if (existingItem != null) {
+            // Product already exists, check if we can add it
+            int newTotalQuantity = existingItem.getQuantity() + quantity;
+            if (product.isInStock(newTotalQuantity)) {
+                existingItem.setQuantity(newTotalQuantity);
+                System.out.println("Added " + quantity + "x " + product.getName() + " to cart (Total: " + newTotalQuantity + "x)");
+            } else {
+                System.out.println("Error: Not enough stock for " + product.getName() + ". Available: " + product.getQuantity() + ", Requested total: " + newTotalQuantity);
+            }
+        } else {
+            // New product
             items.add(new CartItem(product, quantity));
             System.out.println("Added " + quantity + "x " + product.getName() + " to cart");
-        } else {
-            System.out.println("Error: Not enough stock for " + product.getName());
         }
     }
 
