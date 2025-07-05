@@ -1,6 +1,6 @@
 package models;
 
-class Customer {
+public class Customer {
     private String name;
     private double balance;
 

@@ -1,6 +1,6 @@
 package interfaces;
 
-interface Expirable {
+public interface Expirable {
     boolean isExpired();
     String getExpirationDate();
 }

@@ -1,6 +1,6 @@
 package interfaces;
 
-interface Shippable {
+public interface Shippable {
     String getName();
     double getWeight();
 }
